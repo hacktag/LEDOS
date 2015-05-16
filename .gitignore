@@ -1,0 +1,8 @@
+# Ignore project files
+*.creator*
+*.config
+*.files
+*.includes
+
+# Ignore build directories
+build-*
