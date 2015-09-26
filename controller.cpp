@@ -2,9 +2,10 @@
 #include "controller.h"
 #include "color_effect.h"
 #include "fade_effect.h"
+#include "activecolor_effect.h"
 #include "serial_cli_controller.h"
 
-Effect *Controller::effects[] = { new ColorEffect(), new FadeEffect() };
+Effect *Controller::effects[] = { new ActiveColorEffect(), new ColorEffect(), new FadeEffect() };
 const int Controller::effectCount = sizeof(Controller::effects) / sizeof(Effect*);
 Effect *Controller::currentEffect;
 
