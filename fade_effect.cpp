@@ -12,6 +12,9 @@ void FadeEffect::init()
     if( R() == 255 ) R(254);
     if( G() == 255 ) G(254);
     if( B() == 255 ) R(254);
+    if( R() == 0 ) R(1);
+    if( G() == 0 ) G(1);
+    if( B() == 0 ) R(1);
     stage = 0;
     renderTime = 0;
 }
