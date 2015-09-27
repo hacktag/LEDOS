@@ -42,6 +42,8 @@ protected:
 
 private:
     static LEDColorPrivate *d_ptr;
+
+    friend class SerialCLIController;
 };
 
 #endif // LED_COLOR_H

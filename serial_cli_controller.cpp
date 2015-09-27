@@ -3,7 +3,6 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 #include "fade_effect.h"
-#include "activecolor_effect.h"
 
 SerialCLIController::SerialCLIController()
 {
@@ -39,10 +38,12 @@ void SerialCLIController::update()
 
 void SerialCLIController::execCommand()
 {
-    // Print the received command
-    Serial.println(command);
-
-    if (command == "shutdown") // SHUTDOWN
+    if ( command[0] == 'b' ) {
+      LEDColor::R( hex2bin( command.substring(1, 3).c_str() ) );
+      LEDColor::G( hex2bin( command.substring(3, 5).c_str() ) );
+      LEDColor::B( hex2bin( command.substring(5, 7).c_str() ) );
+    }
+    else if (command == "shutdown") // SHUTDOWN
     {
         currentEffect->stop();
         currentEffect->reset();
@@ -62,27 +63,11 @@ void SerialCLIController::execCommand()
     }
     else if ( command.startsWith("c ") ) {
       int offset = 0, temp;
-      int R = command.substring(2).toInt();
-      temp = R; do { ++offset; temp /= 10; } while (temp);
-      int G = command.substring(3 + offset).toInt();
-      temp = G; do { ++offset; temp /= 10; } while (temp);
-      int B = command.substring(4 + offset).toInt();
-      if( strcmp(currentEffect->name(), "activecolor") == 0 ) {
-        ActiveColorEffect *acolor = static_cast<ActiveColorEffect*>(currentEffect);
-        acolor->setColor( (byte)R , (byte)G, (byte)B );
-        acolor->update();
-      }
-    }
-    else if ( command.startsWith("b ") ) {
-      int offset = 0, temp;
-      byte R = command.substring(3, 4)[0];
-      byte G = command.substring(4, 5)[0];
-      byte B = command.substring(5, 6)[0];
-      if( strcmp(currentEffect->name(), "activecolor") == 0 ) {
-        ActiveColorEffect *acolor = static_cast<ActiveColorEffect*>(currentEffect);
-        acolor->setColor( R , G, B );
-        acolor->update();
-      }
+      LEDColor::R( temp = command.substring(2).toInt() );
+      do { ++offset; temp /= 10; } while (temp);
+      LEDColor::G( temp = command.substring(3 + offset).toInt() );
+      do { ++offset; temp /= 10; } while (temp);
+      LEDColor::B( command.substring(4 + offset).toInt() );
     }
     else
     {
@@ -105,7 +90,23 @@ void SerialCLIController::execCommand()
 
     // Discard the current command
     command = "";
+}
 
-    // New prompt
-    Serial.print(">");
+int SerialCLIController::hex2bin( const char *s )
+{
+  int ret = 0;
+  int i;
+  for( i=0; i<2; i++ )
+  {
+    char c = *s++;
+    int n=0;
+    if( '0'<=c && c<='9' )
+      n = c-'0';
+    else if( 'a'<=c && c<='f' )
+      n = 10 + c-'a';
+    else if( 'A'<=c && c<='F' )
+      n = 10 + c-'A';
+    ret = n + ret*16;
+  }
+  return ret;
 }

@@ -14,6 +14,7 @@ public:
 private:
     String command = "";
     void execCommand();
+    int hex2bin( const char *s );
 };
 
 #endif // SERIAL_CLI_CONTROLLER_H
