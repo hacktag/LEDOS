@@ -1,19 +1,27 @@
 LEDOS
 =====
 
-Notes
------
+What is LEDOS?
+--------------
+LEDOS is a software we are working on for Arduino and ESP8266 that can control an LED strip via multiple interfaces.
 
-### EEPROM
-Below is a table describing the usage of the EEPROM memory by LEDOS.
+Can we make an Ambilight with LEDOS?
+------------------------------------
+Not only you can, but we already wrote an app that sends the avarage color from your screen to LEDOS. And it is written in C++ with Qt so it is blazingly fast.
 
-| EEPROM Address | Usage Description                |
-| -------------- | -------------------------------- |
-| __[0-31]__     | Reserved for __```LEDOS ```__.   |
-| [0-1]          | EEPROM Schema ID                 |
-| [2]            | Represents the last effect set.  |
-| [3-6]          | The last used effect duration.   |
-| [9-11]         | Active Color Space 1             |
-| [12-14]        | Active Color Space 2             |
-| [15-17]        | Active Color Space 3             |
-| [18-20]        | Active Color Space 4             |
+See [LEDOS Ambilight](https://github.com/hacktag/LEDOSAmbilight)
+
+How to use it?
+--------------
+The repo comes with a `Makefile` that does all the magic. All you need to do is:
+
+```bash
+make
+make upload
+```
+
+And the entire code will end up on the Arduino. It's that easy...
+
+License
+-------
+LEDOS and all of the associated documentation are distributed under the terms of the MIT License. See `LICENSE` for details.
