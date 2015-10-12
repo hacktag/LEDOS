@@ -69,6 +69,15 @@ void SerialCLIController::execCommand()
       do { ++offset; temp /= 10; } while (temp);
       LEDColor::B( command.substring(4 + offset).toInt() );
     }
+    else if ( command.startsWith("w ") ) {
+      int offset = 0;
+      float temp;
+      LEDColor::RFactor( temp = command.substring(2).toFloat() );
+      do { ++offset; temp /= 10; } while (temp);
+      LEDColor::GFactor( temp = command.substring(3 + offset).toFloat() );
+      do { ++offset; temp /= 10; } while (temp);
+      LEDColor::BFactor( command.substring(4 + offset).toFloat() );
+    }
     else
     {
         bool error = true;
