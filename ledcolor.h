@@ -23,6 +23,21 @@ public:
      */
      static byte B();
 
+     /**
+      * @brief Returns the current scaling factor of the Red color
+      */
+      static float RFactor();
+
+     /**
+      * @brief Returns the current scaling factor of the Green color
+      */
+      static float GFactor();
+
+     /**
+      * @brief Returns the current scaling factor of the Blue color
+      */
+      static float BFactor();
+
 protected:
 
     /**
@@ -39,6 +54,21 @@ protected:
      * @brief Returns the current value of the Blue color
      */
      static byte B(byte);
+
+     /**
+      * @brief Sets the current scaling factor of the Red color
+      */
+      static float RFactor(float);
+
+     /**
+      * @brief Sets the current scaling factor of the Green color
+      */
+      static float GFactor(float);
+
+     /**
+      * @brief Sets the current scaling factor of the Blue color
+      */
+      static float BFactor(float);
 
 private:
     static LEDColorPrivate *d_ptr;
