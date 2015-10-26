@@ -11,7 +11,7 @@ public:
     void update();
     const char* name()  { return "HSV fade"; }
 private:
-    float stepSize, hue, sat, val;
+    float hsvStep, satStep, hue, sat, val;
     static unsigned short renderStep;
 };
 
