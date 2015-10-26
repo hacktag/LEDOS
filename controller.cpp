@@ -1,9 +1,10 @@
 #include "controller.h"
 
 #include "rgb_fade_effect.h"
+#include "hsv_fade_effect.h"
 #include "serial_cli_controller.h"
 
-Effect *Controller::effects[] = { new RGBFadeEffect() };
+Effect *Controller::effects[] = { new RGBFadeEffect(), new HSVFadeEffect()};
 const int Controller::effectCount = sizeof(Controller::effects) / sizeof(Effect*);
 Effect *Controller::currentEffect;
 
