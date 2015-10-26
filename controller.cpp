@@ -19,15 +19,16 @@ Controller::Controller()
 
 void Controller::init()
 {
-    if( mode > -1 ) // LED OFF
-    {
-        currentEffect = effects[mode];
-        currentEffect->start();
-    }
-
     for(int i = 0; i < controllerCount; ++i)
     {
         controllers[i]->init();
+    }
+    
+    if( mode > -1 ) // LED OFF
+    {
+        currentEffect = effects[mode];
+        currentEffect->init();
+        currentEffect->start();
     }
 }
 
