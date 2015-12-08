@@ -5,12 +5,13 @@
 #include "hsi_fade_effect.h"
 #include "random_fade_effect.h"
 #include "serial_cli_controller.h"
+#include "soft_serial_cli_controller.h"
 
 Effect *Controller::effects[] = { new RGBFadeEffect(), new HSVFadeEffect(), new HSIFadeEffect(), new RandomFadeEffect()};
 const int Controller::effectCount = sizeof(Controller::effects) / sizeof(Effect*);
 Effect *Controller::currentEffect;
 
-Controller *Controller::controllers[] = { new SerialCLIController() };
+Controller *Controller::controllers[] = { new SerialCLIController(), new SoftSerialCLIController()};
 const int Controller::controllerCount = sizeof(Controller::controllers) / sizeof(Controller*);
 
 //int lastMode = 0;

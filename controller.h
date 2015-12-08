@@ -8,6 +8,7 @@ public:
     Controller();
     virtual void init();
     virtual void update();
+    
 
 protected:
     static Effect *effects[];

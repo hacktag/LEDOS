@@ -7,12 +7,12 @@
 #include <ESP8266TrueRandom.h>
 
 Controller controller;
-SoftwareSerial SoftSerial(SOFT_SERIAL_RX_PIN, SOFT_SERIAL_TX_PIN);
+
 
 void setup()
 {
     Serial.begin(115200);
-    SoftSerial.begin(115200);
+    
 //    delay(3000);
 //    analogWriteFreq(2000);
 
