@@ -9,7 +9,7 @@ unsigned long Effect::renderTime = 0;
 
 void Effect::duration(unsigned int duration)
 {
-    m_duration = duration;
+    m_duration = constrain(duration, 1, MAX_EFFECT_DURATION);
 }
 
 int Effect::duration()
@@ -19,7 +19,7 @@ int Effect::duration()
 
 void Effect::brightness(byte brightness)
 {
-    m_brightness = brightness;
+    m_brightness =  constrain(brightness, 1, 255);
 }
 
 byte Effect::brightness()

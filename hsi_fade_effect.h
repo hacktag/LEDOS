@@ -1,19 +1,19 @@
 #include "effect.h"
 
-#ifndef HSV_FADE_EFFECT_H
-#define HSV_FADE_EFFECT_H
+#ifndef HSI_FADE_EFFECT_H
+#define HSI_FADE_EFFECT_H
 
-class HSVFadeEffect : public Effect
+class HSIFadeEffect : public Effect
 {
 public:
     void init();
     static void duration(unsigned int);
     void update();
-    const char* name()  { return "HSV fade"; }
+    const char* name()  { return "HSI fade"; }
 private:
     byte rgb[3];
     float hueStep, hue, sat, val;
     static unsigned short renderStep;
 };
 
-#endif // HSV_FADE_EFFECT_H
+#endif // HSI_FADE_EFFECT_H

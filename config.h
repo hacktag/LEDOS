@@ -1,12 +1,21 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define LED_R_PIN 13
-#define LED_G_PIN 12
-#define LED_B_PIN 14
+#define LED_R_PIN 12
+#define LED_G_PIN 14
+#define LED_B_PIN 13
+
+#define SOFT_SERIAL_RX_PIN 5
+#define SOFT_SERIAL_TX_PIN 4
 
 #define DEF_EFFECT_DURATION 10000
 #define DEF_EFFECT_BRIGHTNESS 255
+
+#define MAX_EFFECT_DURATION 3600000
+
+#define DEF_MAX_RED PWMRANGE
+#define DEF_MAX_GREEN round(PWMRANGE/1.764)
+#define DEF_MAX_BLUE round(PWMRANGE/3.79)
 
 #endif // CONFIG_H
 

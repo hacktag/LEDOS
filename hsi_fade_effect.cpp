@@ -1,6 +1,6 @@
-#include "hsv_fade_effect.h"
+#include "hsi_fade_effect.h"
 
-void HSVFadeEffect::init()
+void HSIFadeEffect::init()
 {
     hueStep = 0.001;
     hue = 0;
@@ -9,16 +9,17 @@ void HSVFadeEffect::init()
     renderTime = millis();
 }
 
-void HSVFadeEffect::update()
+void HSIFadeEffect::update()
 {
     if( millis() < renderTime ) return;
 
     if (hue<=1-hueStep) hue += hueStep;
     else hue=0;
 
-    setHSV(hue,sat,(float) m_brightness/255);
-    
-//    Serial.println(getRGB());
+    hsi2rgb(hue,sat,(float) m_brightness/255,rgb);
+    setRGB(rgb[0],rgb[1],rgb[2]);
 
+//    Serial.println(getRGB());
+    
     renderTime += ceil((float)m_duration*hueStep);
 }

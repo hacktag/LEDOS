@@ -22,7 +22,10 @@ void SerialCLIController::update()
         {
             execCommand();
         } else {
-            command += byte;
+            // Discard carriage return and append byte
+            if( byte != '\r' ) {
+              command += byte;
+            }
             // Discard commands longer than 255 symbols
             if( command.length() > 255 )
                 command = "";
@@ -58,6 +61,34 @@ void SerialCLIController::execCommand()
     {
         currentEffect->brightness(command.substring(22).toInt());
     }
+    else if (command == "effect brightness up") // EFFECT BRIGHTNESS UP
+    {
+//        Serial.println(currentEffect->brightness());
+        currentEffect->brightness((currentEffect->brightness()*2 < 256) ? currentEffect->brightness()*2 :255 );
+//        Serial.println(currentEffect->brightness());
+//        Serial.println();
+    }
+    else if (command == "effect brightness down") // EFFECT BRIGHTNESS DOWN
+    {
+//        Serial.println(currentEffect->brightness());
+        currentEffect->brightness(currentEffect->brightness()/2);
+//        Serial.println(currentEffect->brightness());
+//        Serial.println();
+    }
+    else if (command == "effect duration up") // EFFECT DURATION UP
+    {
+//        Serial.println(currentEffect->duration());
+        currentEffect->duration(currentEffect->duration()*2);
+//        Serial.println(currentEffect->duration());
+//        Serial.println();
+    }
+    else if (command == "effect duration down") // EFFECT DURATION DOWN
+    {
+//        Serial.println(currentEffect->duration());
+        currentEffect->duration(currentEffect->duration()/2);
+//        Serial.println(currentEffect->duration());
+//        Serial.println();
+    }
     else if ( command.startsWith("c ") ) {
       int offset = 0, temp;
       R( temp = command.substring(2).toInt() );
@@ -74,6 +105,7 @@ void SerialCLIController::execCommand()
       whiteG( temp = command.substring(3 + offset).toInt() );
       do { ++offset; temp /= 10; } while (temp);
       whiteB( command.substring(4 + offset).toInt() );
+      Serial.println("White ballance set to "+Led::getWhiteValue());
       setRGB(R(),G(),B());
     }
     else if ( command.startsWith("h ") ) {
